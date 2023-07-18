@@ -30,6 +30,20 @@ module.exports.getById = async (request, response, next) => {
   response.json(orden);
 };
 //Crear
-module.exports.create = async (request, response, next) => {};
+module.exports.create = async (request, response, next) => {
+  let infoOden = request.body;
+  const newVideojuego = await prisma.orden.create({
+    data: {
+      fechaOrden: infoOden.fechaOrden,
+      usuario: 1,
+      videojuegos: {
+        createMany: {
+          data: infoOden.videojuegos,
+        },
+      },
+    },
+  });
+  response.json(newVideojuego);
+};
 //Actualizar
 module.exports.update = async (request, response, next) => {};

@@ -10,23 +10,20 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   isAutenticated: boolean;
   currentUser: any;
-  qtyItems:Number = 0;
-  constructor(private cartService: CartService,
-    private router: Router) {
-   
-  }
+  qtyItems: Number = 0;
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     //valores de prueba
     this.isAutenticated = false;
-    let user={
-      name:"pepito aguacates",
-      email:"pAguacates@prueba.com",
-
-    }
-    this.currentUser=user; 
-     //Suscribirse al observable que gestiona la cantidad de items del carrito
-    
+    let user = {
+      name: 'pepito aguacates',
+      email: 'pAguacates@prueba.com',
+    };
+    this.currentUser = user;
+    //Suscribirse al observable que gestiona la cantidad de items del carrito
+    this.cartService.countItems.subscribe((value) => {
+      this.qtyItems = value;
+    });
   }
-  
 }
