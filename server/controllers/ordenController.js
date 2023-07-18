@@ -35,7 +35,7 @@ module.exports.create = async (request, response, next) => {
   const newVideojuego = await prisma.orden.create({
     data: {
       fechaOrden: infoOden.fechaOrden,
-      usuario: 1,
+      usuarioId: 1,
       videojuegos: {
         createMany: {
           data: infoOden.videojuegos,

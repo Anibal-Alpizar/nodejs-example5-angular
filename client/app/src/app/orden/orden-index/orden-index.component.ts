@@ -62,14 +62,14 @@ export class OrdenIndexComponent implements OnInit {
       // tabla intermedia
       // lista de objetos {videojuegoid: valor, cantidad: valor}
       let itemsCarrito = this.cartService.getItems;
-      let detalle = itemsCarrito.map((x) => ({
+      let detalles = itemsCarrito.map((x) => ({
         ['videojuegoId']: x.idItem,
         ['cantidad']: x.cantidad,
       }));
       // datos para el api
       let infoOrden = {
-        fechaOrden: new Date(this.fecha),
-        videojuego: detalle,
+        "fechaOrden": new Date(this.fecha),
+        "videojuegos": detalles
       };
       console.log(infoOrden);
       this.gService.create('orden', infoOrden).subscribe((respuesta: any) => {
